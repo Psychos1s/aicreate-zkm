@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "deny": [
+      "WebFetch", "WebSearch", "TodoWrite"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/common/sync-status.py"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .claude/common/user_session.py"
+          }
+        ]
+      }
+    ]
+  }
+}

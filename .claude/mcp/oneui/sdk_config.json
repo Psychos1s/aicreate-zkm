@@ -1,0 +1,46 @@
+{
+  "apis": {
+    "application.openApp": {
+      "module": "application",
+      "api": "openApp",
+      "description": "打开一个应用页面",
+      "payload_schema": {
+        "min_length": 2,
+        "items": [
+          { "index": 0, "name": "url",    "type": "string", "description": "应用 URL",  "required": true },
+          { "index": 1, "name": "name",   "type": "string", "description": "应用名称",  "required": true },
+          { "index": 2, "name": "config", "type": "object", "description": "可选路由配置", "required": false }
+        ]
+      },
+      "examples": [
+        {
+          "description": "打开恩牛网页面",
+          "payload": ["https://ennew.com", "恩牛网"]
+        }
+      ]
+    },
+    "action.trigger": {
+      "module": "action",
+      "api": "trigger",
+      "description": "触发自定义行为，通过 channel 广播事件给已注册的监听端",
+      "payload_schema": {
+        "min_length": 1,
+        "items": [
+          { "index": 0, "name": "name",              "type": "string", "description": "行为名称",                              "required": true },
+          { "index": 1, "name": "params",             "type": "object", "description": "行为参数",                              "required": false },
+          { "index": 2, "name": "containerCodeList",  "type": "array",  "description": "行为触发端列表，为空则广播给所有端",       "required": false }
+        ]
+      },
+      "examples": [
+        {
+          "description": "触发刷新列表行为",
+          "payload": ["refreshList", { "forceUpdate": true }]
+        },
+        {
+          "description": "触发指定容器的行为",
+          "payload": ["submitForm", { "formId": "abc" }, ["container-a", "container-b"]]
+        }
+      ]
+    }
+  }
+}
